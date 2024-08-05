@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Saleswebmvc.Data;
-
+using Saleswebmvc.Services;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,7 @@ builder.Services.AddDbContext<SaleswebmvcContext>(options =>
 options.UseMySql(
     "server=127.0.0.1;initial catalog=SalesWeb_Aplication;uid=root;pwd=123456",
     Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.38-mysql")));
-
+builder.Services.AddScoped<SellerService>();
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddControllersWithViews();
 
