@@ -11,6 +11,7 @@ options.UseMySql(
     Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.38-mysql")));
 builder.Services.AddScoped<SellerService>();
 builder.Services.AddScoped<SeedingService>();
+builder.Services.AddScoped<DepartmentService>();
 builder.Services.AddControllersWithViews();
 
 
