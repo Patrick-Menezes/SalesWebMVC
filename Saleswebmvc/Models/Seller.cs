@@ -1,9 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Saleswebmvc.Models
-
-
 {
     public class Seller
     {
@@ -12,9 +11,11 @@ namespace Saleswebmvc.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public DateTime BirtDate { get; set; }
-        public double BaseSalary { get; set; }        
+        public double BaseSalary { get; set; }
         public Department Department { get; set; }
-        public ICollection<SallesRecord>Sales { get; set; } = new List<SallesRecord>();
+        public int DepartmentId { get; set; }
+
+        public ICollection<SallesRecord> Sales { get; set; } = new List<SallesRecord>();
 
         public Seller() { }
 
@@ -28,28 +29,29 @@ namespace Saleswebmvc.Models
             Department = department;
         }
 
-    public void AddSales(SallesRecord sr)
-    {
-        Sales.Add(sr);
-    }
-    public void RemoveSales(SallesRecord sr)
+        public void AddSales(SallesRecord sr)
         {
-
-        Sales.Remove(sr);
+            Sales.Add(sr);
         }
-    
-      
-  public double TotalSales(DateTime initial, DateTime final)
+        public void RemoveSales(SallesRecord sr)
         {
 
-            return Sales.Where(sr=> sr.Date>= initial && sr.Date <= final).Sum(sr=>sr.Amount);
+            Sales.Remove(sr);
+        }
 
-        }  
-    
-       }
 
+        public double TotalSales(DateTime initial, DateTime final)
+        {
+
+            return Sales.Where(sr => sr.Date >= initial && sr.Date <= final).Sum(sr => sr.Amount);
+
+        }
 
     }
+}
+
+
+    
 
 
 
