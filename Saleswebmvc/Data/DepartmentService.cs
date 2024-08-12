@@ -1,22 +1,25 @@
 ﻿using Saleswebmvc.Models;
 using System.Collections.Generic;
-namespace Saleswebmvc.Data
+namespace Saleswebmvc.Data;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+
+public class DepartmentService
 {
-    public class DepartmentService
+    private SaleswebmvcContext _context;
+
+    public DepartmentService(SaleswebmvcContext context)
     {
-        private SaleswebmvcContext _context;
-
-        public DepartmentService(SaleswebmvcContext context)
-        {
-            _context = context;
-        }
-
-        public List<Department>  FindAll()
-        {
-            return _context.Department.OrderBy(x => x.Name).ToList();
-        }
-
-
-
+        _context = context;
     }
+
+   public async Task<List<Department>> FindAllAsync()
+        
+    {
+        return await _context.Department.OrderBy(x => x.Name).ToListAsync();
+    }
+
+
+
 }
